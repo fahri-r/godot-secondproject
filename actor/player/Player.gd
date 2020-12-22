@@ -90,7 +90,7 @@ func change_weapon():
 func weapon_attack():
 	if Input.is_action_just_pressed("attack"):
 		if sprite.has_node("Sword"):
-			sprite.get_node("Sword")._init_tween()
+			sprite.get_node("Sword").weapon_attack()
 			
 		elif sprite.has_node("Gun"):
 			if fire_timer.is_stopped():

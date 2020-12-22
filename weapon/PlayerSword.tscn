@@ -2,30 +2,34 @@
 
 [ext_resource path="res://weapon/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://weapon/PlayerSword.gd" type="Script" id=2]
-[ext_resource path="res://weapon/sword.png" type="Texture" id=3]
+[ext_resource path="res://weapon/player_sword.png" type="Texture" id=3]
 [ext_resource path="res://box/DamageBox.tscn" type="PackedScene" id=4]
 
+
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2, 6 )
+extents = Vector2( 2.99998, 8 )
 
 [node name="Sword" instance=ExtResource( 1 )]
+scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
 texture = ExtResource( 3 )
 centered = false
-offset = Vector2( -4, -24 )
+offset = Vector2( -5, -30 )
 
 [node name="DamageBox" parent="Sprite" index="0" instance=ExtResource( 4 )]
+position = Vector2( 1.99996, -12 )
 collision_layer = 2
 
 [node name="CollisionShape2D" parent="Sprite/DamageBox" index="0"]
-position = Vector2( 0, -17 )
+position = Vector2( -2.00003, -7.99999 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="1"]
-position = Vector2( 23, 0 )
+position = Vector2( 28, 0 )
 rotation = -1.5708
 enabled = true
 cast_to = Vector2( 0, 21 )

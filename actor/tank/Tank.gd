@@ -1,6 +1,7 @@
 extends Node2D
 
 const MISSILE = preload("res://weapon/Bullet/TankMissile.tscn")
+const HEALTHBAR_TIMER = 1.2
 
 export (int) var max_hp = 10
 var hp = max_hp
@@ -11,6 +12,7 @@ var target_position = Vector2.RIGHT
 onready var gun = $Gun
 onready var muzzle = $Gun/Position2D
 onready var fire_timer = $FireTimer
+onready var healthbar = $HealthBar
 
 func _process(_delta):
 	if target:
@@ -34,6 +36,9 @@ func weapon_attack():
 		missile.rotation = missile.velocity.angle()
 		fire_timer.start()
 
+func died():
+	queue_free()
+
 
 func _on_TargetDetector_body_entered(body):
 	target = body
@@ -45,3 +50,10 @@ func _on_TargetDetector_body_exited(_body):
 
 func _on_HitBox_hit(damage):
 	hp -= damage
+	
+	if hp <= 0:
+		died()
+	else:
+		healthbar.visible = true
+		yield(get_tree().create_timer(HEALTHBAR_TIMER),"timeout")
+		healthbar.visible = false

@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
-height = 4.0
+height = 6.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -89,7 +89,7 @@ tracks/1/keys = {
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 5.0
-height = 4.0
+height = 6.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2147483724
@@ -99,18 +99,18 @@ script = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="WeaponPosition" type="Position2D" parent="."]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 9
-frame = 8
+frame = 3
 
 [node name="Sword" parent="Sprite" instance=ExtResource( 3 )]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 3 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -134,7 +134,7 @@ one_shot = true
 collision_mask = 100
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2( 0, 2 )
+position = Vector2( 0, 3 )
 shape = SubResource( 6 )
 [connection signal="hit" from="HitBox" to="." method="_on_HitBox_hit"]
 

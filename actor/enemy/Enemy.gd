@@ -1,5 +1,7 @@
 extends Actor
 
+const HEALTHBAR_TIMER = 1.2
+
 export (int) var max_hp = 10
 var hp = max_hp
 
@@ -11,18 +13,18 @@ onready var sword = $Sword
 onready var floor_detector = $Sprite/FloorDetector
 onready var sprite = $Sprite
 onready var visibility_notifier = $VisibilityNotifier2D
+onready var healthbar = $HealthBar
 
 func _ready():
 	MAXSPEED = 20
 
 
 func find_target():
-	if target:
-		target_position = (target.global_position - self.global_position).normalized()
-		
-		if target.motion.y != 0:
-			yield(get_tree().create_timer(0.2), "timeout")
-			jump()
+	target_position = (target.global_position - self.global_position).normalized()
+	
+	if target.motion.y != 0:
+		yield(get_tree().create_timer(0.2), "timeout")
+		jump()
 
 
 func get_input_vector():
@@ -91,3 +93,10 @@ func _on_PlayerDetector_body_exited(_body):
 
 func _on_HitBox_hit(damage):
 	hp -= damage
+	
+	if hp <= 0:
+		died()
+	else:
+		healthbar.visible = true
+		yield(get_tree().create_timer(HEALTHBAR_TIMER),"timeout")
+		healthbar.visible = false

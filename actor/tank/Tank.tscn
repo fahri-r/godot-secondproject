@@ -51,8 +51,9 @@ position = Vector2( 0, 4 )
 shape = SubResource( 2 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 5 )]
-margin_top = -5.0
-margin_bottom = 11.0
+visible = false
+margin_top = -6.0
+margin_bottom = 10.0
 [connection signal="body_entered" from="TargetDetector" to="." method="_on_TargetDetector_body_entered"]
 [connection signal="body_exited" from="TargetDetector" to="." method="_on_TargetDetector_body_exited"]
 [connection signal="hit" from="HitBox" to="." method="_on_HitBox_hit"]

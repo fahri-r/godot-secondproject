@@ -12,14 +12,14 @@ func _ready():
 
 func _state_logic(delta):
 	input_vector = parent.get_input_vector()
-	parent.find_target()
 	parent.apply_gravity(delta)
 	parent.apply_movement()
 	parent.set_horizontal_motion(input_vector, delta)
 	parent.set_friction(input_vector)
 	parent.update_snap()
-	parent.update_facing()
-	parent.died()
+	if parent.target:
+		parent.find_target()
+		parent.update_facing()
 
 func _get_transition(delta):
 	match state:
