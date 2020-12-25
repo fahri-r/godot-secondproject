@@ -1,5 +1,8 @@
 extends Actor
 
+signal enemy_died
+signal enemy_ready
+
 const HEALTHBAR_TIMER = 1.2
 
 export (int) var max_hp = 10
@@ -9,14 +12,15 @@ var target_position = Vector2.RIGHT
 var target = null
 
 onready var animation = $AnimationPlayer
-onready var sword = $Sword
 onready var floor_detector = $Sprite/FloorDetector
 onready var sprite = $Sprite
 onready var visibility_notifier = $VisibilityNotifier2D
 onready var healthbar = $HealthBar
+onready var sword = $Sword
 
 func _ready():
 	MAXSPEED = 20
+	emit_signal("enemy_ready", sprite.material)
 
 
 func find_target():
@@ -72,24 +76,25 @@ func update_facing():
 	sprite.scale.x = sign(target_position.x)
 
 func died():
-	if hp <= 0:
-		jump()
-		set_collision_layer_bit(4, false)
-		set_collision_mask_bit(3, false)
-		
-		if !visibility_notifier.is_on_screen():
-			queue_free()
+	emit_signal("enemy_died")
+	target = null
+	
+	sprite.material = null
+	
+	jump()
+	set_collision_layer_bit(4, false)
+	set_collision_mask_bit(3, false)
+	
+	if !visibility_notifier.is_on_screen():
+		queue_free()
 
 
 func _on_PlayerDetector_body_entered(body):
 	target = body
-	sword.set_process(true)
 
 
 func _on_PlayerDetector_body_exited(_body):
 	target = null
-	sword.set_process(false)
-
 
 func _on_HitBox_hit(damage):
 	hp -= damage

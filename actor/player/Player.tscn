@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://actor/player/player.png" type="Texture" id=1]
 [ext_resource path="res://actor/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://weapon/PlayerSword.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actor/player/PlayerState.gd" type="Script" id=4]
 [ext_resource path="res://box/HitBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://effect/light/basic_circle.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -94,6 +95,13 @@ height = 6.0
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 2147483724
 script = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -11 )
+texture = ExtResource( 6 )
+texture_scale = 1.5
+mode = 2
+shadow_enabled = true
 
 [node name="PlayerState" type="Node2D" parent="."]
 script = ExtResource( 4 )

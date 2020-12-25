@@ -3,15 +3,18 @@ extends Node2D
 onready var timer = $Timer
 onready var animation_player = $AnimationPlayer
 onready var sword_collision = $Sprite/DamageBox/CollisionShape2D
+onready var sprite = $Sprite
 
 func _ready():
-	set_process(false)
+	get_parent().connect("enemy_died", self, "on_enemy_died")
+	get_parent().connect("enemy_ready", self, "on_enemy_ready")
 
 
 func _process(_delta):
-	check_weapon_attack()
-	weapon_rotation()
-	weapon_attack()
+	if get_parent().target:
+		check_weapon_attack()
+		weapon_rotation()
+		weapon_attack()
 
 
 func weapon_rotation():
@@ -30,3 +33,11 @@ func check_weapon_attack():
 		sword_collision.disabled = false
 	else:
 		sword_collision.disabled = true
+
+
+func on_enemy_died():
+	sprite.material = null
+
+
+func on_enemy_ready(material):
+	sprite.material = material

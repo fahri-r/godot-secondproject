@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actor/tank/Tank.gd" type="Script" id=1]
 [ext_resource path="res://actor/tank/tank.png" type="Texture" id=2]
 [ext_resource path="res://actor/tank/tank-gun.png" type="Texture" id=3]
 [ext_resource path="res://box/HitBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hud/EnemyStats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://effect/light/light_only.tres" type="Material" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.0
@@ -20,6 +21,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, 3 )
 
 [node name="Sprite" type="Sprite" parent="Gun"]
+material = ExtResource( 6 )
 position = Vector2( 9, 0 )
 texture = ExtResource( 3 )
 
@@ -27,6 +29,7 @@ texture = ExtResource( 3 )
 position = Vector2( 14, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 6 )
 texture = ExtResource( 2 )
 
 [node name="TargetDetector" type="Area2D" parent="."]

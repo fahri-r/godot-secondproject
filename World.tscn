@@ -1,8 +1,8 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://actor/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actor/spike/Spike.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tilemap.png" type="Texture" id=3]
+[ext_resource path="res://level/tilemap.png" type="Texture" id=3]
 [ext_resource path="res://actor/player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actor/tank/Tank.tscn" type="PackedScene" id=5]
 [ext_resource path="res://hud/MissileCoolDown.gd" type="Script" id=6]
@@ -10,6 +10,7 @@
 [ext_resource path="res://hud/PlayerStats.gd" type="Script" id=8]
 [ext_resource path="res://hud/health.png" type="Texture" id=9]
 [ext_resource path="res://weapon/Bullet/missile.png" type="Texture" id=10]
+[ext_resource path="res://background.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -487,6 +488,13 @@ anti_aliasing = false
 [node name="World" type="Node2D"]
 script = ExtResource( 7 )
 
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0.235294, 0.235294, 0.235294, 1 )
+show_behind_parent = true
+position = Vector2( 140, 20 )
+scale = Vector2( 3.1875, 2.6875 )
+texture = ExtResource( 11 )
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 48 )
 cell_size = Vector2( 16, 16 )
@@ -557,3 +565,6 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.196078, 0.196078, 0.196078, 1 )

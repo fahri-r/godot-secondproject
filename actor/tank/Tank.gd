@@ -13,9 +13,11 @@ onready var gun = $Gun
 onready var muzzle = $Gun/Position2D
 onready var fire_timer = $FireTimer
 onready var healthbar = $HealthBar
+onready var body_sprite = $Sprite
+onready var gun_sprite = $Gun/Sprite
 
 func _process(_delta):
-	if target:
+	if target and !hp <= 0:
 			find_target()
 			weapon_attack()
 
@@ -37,6 +39,9 @@ func weapon_attack():
 		fire_timer.start()
 
 func died():
+	gun_sprite.material = null
+	body_sprite.material = null
+	yield(get_tree().create_timer(1),"timeout")
 	queue_free()
 
 
