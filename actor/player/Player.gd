@@ -104,5 +104,11 @@ func weapon_attack():
 				fire_timer.start()
 
 
+func check_box_collision(input_vector: Vector2, delta) -> void:
+	var box : = get_slide_collision(0).collider as Box
+	if box:
+		box.push(input_vector, delta)
+
+
 func _on_HitBox_hit(damage):
 	hp -= damage

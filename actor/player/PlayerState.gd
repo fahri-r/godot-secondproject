@@ -18,6 +18,8 @@ func _state_logic(delta):
 	parent.jump()
 	parent.apply_gravity(delta)
 	parent.apply_movement()
+	if parent.get_slide_count() > 0:
+		parent.check_box_collision(input_vector, delta)
 	parent.update_facing()
 	parent.change_weapon()
 	parent.weapon_attack()
