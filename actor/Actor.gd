@@ -6,6 +6,7 @@ const JUMPFORCE = 128
 const ACCELERATION = 512
 const FRICTION = 0.25
 const MAXSLOPEANGLE = 46
+const BOX_SPEED_SCALE = 3
 
 var MAXSPEED
 var motion = Vector2.ZERO

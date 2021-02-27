@@ -7,6 +7,7 @@ const MainInstances = preload("res://MainInstances.tres")
 
 export (int) var max_hp = 100
 var hp = max_hp
+var is_push = false
 
 onready var weapon_position = $WeaponPosition
 onready var sprite = $Sprite
@@ -30,7 +31,10 @@ func get_input_vector():
 
 func set_horizontal_motion(input_vector, delta):
 	if input_vector.x != 0:
-		motion.x += input_vector.x * ACCELERATION * delta
+		if not is_push:
+			motion.x += input_vector.x * ACCELERATION * delta
+		elif is_push:
+			motion.x = input_vector.x * ACCELERATION * delta * BOX_SPEED_SCALE
 		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
 
 
@@ -46,7 +50,7 @@ func update_snap():
 
 func jump():
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and not is_push:
 			motion.y = -JUMPFORCE
 			snap = Vector2.ZERO
 
@@ -88,7 +92,7 @@ func change_weapon():
 
 
 func weapon_attack():
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and not is_push:
 		if sprite.has_node("Sword"):
 			sprite.get_node("Sword").weapon_attack()
 			
@@ -104,10 +108,17 @@ func weapon_attack():
 				fire_timer.start()
 
 
-func check_box_collision(input_vector: Vector2, delta) -> void:
-	var box : = get_slide_collision(0).collider as Box
-	if box:
-		box.push(input_vector, delta)
+func check_push():
+	if is_push:
+		if sprite.has_node("Sword"):
+			sprite.get_node("Sword").visible = false
+		elif sprite.has_node("Gun"):
+			sprite.get_node("Gun").visible = false
+	elif not is_push:
+		if sprite.has_node("Sword"):
+			sprite.get_node("Sword").visible = true
+		elif sprite.has_node("Gun"):
+			sprite.get_node("Gun").visible = true
 
 
 func _on_HitBox_hit(damage):
