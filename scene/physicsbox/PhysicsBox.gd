@@ -22,10 +22,8 @@ func _physics_process(delta):
 func get_input():
 	if Input.is_action_just_pressed("push"):
 		if not body.is_push:
-			set_physics_process(true)
 			body.is_push = true
 		elif body.is_push:
-			set_physics_process(false)
 			body.is_push = false
 	return body.is_push
 

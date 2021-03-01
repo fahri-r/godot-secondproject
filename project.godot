@@ -110,6 +110,7 @@ push={
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="enemy_sword"
 2d_physics/layer_7="spike"
+2d_physics/layer_8="physics_box"
 
 [rendering]
 
