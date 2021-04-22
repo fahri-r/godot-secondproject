@@ -36,6 +36,7 @@ offset = Vector2( -5, -28 )
 
 [node name="DamageBox" parent="Sprite" index="0" instance=ExtResource( 4 )]
 collision_layer = 32
+damage = 15
 
 [node name="CollisionShape2D" parent="Sprite/DamageBox" index="0"]
 position = Vector2( -6.51479e-05, -18 )

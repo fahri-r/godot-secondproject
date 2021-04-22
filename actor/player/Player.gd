@@ -1,5 +1,7 @@
 extends Actor
 
+signal died()
+
 const MISSILE = preload("res://weapon/Bullet/PlayerMissile.tscn")
 const GUN = preload("res://weapon/Gun.tscn")
 const SWORD = preload("res://weapon/PlayerSword.tscn")
@@ -101,6 +103,7 @@ func weapon_attack():
 				var main = get_tree().current_scene
 				var missile = MISSILE.instance()
 				main.add_child(missile)
+				main.move_child(missile,2)
 				missile.global_position = sprite.get_node("Gun").muzzle.global_position
 				missile.velocity = Vector2.RIGHT.rotated(sprite.get_node("Gun").rotation) * missile.bullet_speed
 				missile.velocity.x *= sprite.scale.x
@@ -123,3 +126,5 @@ func check_push():
 
 func _on_HitBox_hit(damage):
 	hp -= damage
+	if hp <=0:
+		emit_signal("died")

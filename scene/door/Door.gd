@@ -6,7 +6,7 @@ onready var area = $Area2D
 
 
 func _ready():
-	var button = get_tree().get_root().find_node("PlatformButton",true,false)
+	var button = get_tree().current_scene.find_node("PlatformButton",true,false)
 	button.connect("pressed", self, "on_pressed")
 	button.connect("unpressed", self, "on_unpressed")
 
@@ -24,4 +24,7 @@ func on_unpressed():
 
 
 func _on_Area2D_body_entered(body):
-	print(body)
+	if body.name == "Player":
+		var next_level = get_parent().name.substr(5)
+		next_level = int(next_level) + 1
+		SceneChanger.change_scene(false,str(next_level))

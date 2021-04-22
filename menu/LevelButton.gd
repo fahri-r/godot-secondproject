@@ -5,5 +5,4 @@ func _ready():
 
 
 func _on_Level_pressed():
-	var path = "res://scene/level/{0}.tscn".format([name])
-	SceneChanger.change_scene(path)
+	SceneChanger.change_scene("res://World.tscn", text)

@@ -18,4 +18,8 @@ func _on_QuitGame_pressed():
 
 
 func _on_NewGame_pressed():
-	SceneChanger.change_scene("res://World.tscn")
+	SceneChanger.change_scene("res://World.tscn", "1")
+
+
+func _on_SelectLevel_pressed():
+	SceneChanger.change_scene("res://menu/SelectLevelMenu.tscn")

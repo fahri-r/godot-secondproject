@@ -4,11 +4,10 @@
 [ext_resource path="res://scene/spike/Spike.gd" type="Script" id=2]
 [ext_resource path="res://box/DamageBox.tscn" type="PackedScene" id=3]
 
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 5 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -56,13 +55,14 @@ hframes = 4
 
 [node name="DamageBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 64
+damage = 5
 
 [node name="CollisionShape2D" parent="DamageBox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hide = SubResource( 3 )
+anims/hide = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
