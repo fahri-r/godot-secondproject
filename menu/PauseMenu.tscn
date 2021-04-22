@@ -83,6 +83,14 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 200, 40 )
 text = "Resume Game"
 
+[node name="RestartLevel" type="Button" parent="CenterContainer2/Panel/VBoxContainer"]
+visible = false
+margin_top = 55.0
+margin_right = 200.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 200, 40 )
+text = "Restart Level"
+
 [node name="SelectLevel" type="Button" parent="CenterContainer2/Panel/VBoxContainer"]
 margin_top = 55.0
 margin_right = 200.0
@@ -97,5 +105,6 @@ margin_bottom = 150.0
 rect_min_size = Vector2( 200, 40 )
 text = "Back to Main Menu"
 [connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/ResumeGame" to="." method="_on_ResumeGame_pressed"]
+[connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/RestartLevel" to="." method="_on_RestartLevel_pressed"]
 [connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/SelectLevel" to="." method="_on_SelectLevel_pressed"]
 [connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/MainMenu" to="." method="_on_MainMenu_pressed"]
